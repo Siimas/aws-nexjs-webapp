@@ -30,6 +30,8 @@ In this section, I will outline the architecture of the deployed web application
 
 (Ensure you include a diagram that visualizes the architecture. You can create one using tools like AWS Architecture Icons, Lucidchart, or draw.io.)
 
+![Cloud Architecture (1)](https://github.com/Siimas/AWS-WebApp-Showcase/assets/61023827/5c49d3ca-feb5-43f4-af05-b5d5f1fec332)
+
 ## Components and Decisions
 - VPC (Virtual Private Cloud):
 
