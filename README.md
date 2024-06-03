@@ -41,9 +41,11 @@ In this section, I will outline the architecture of the deployed web application
 
 - Load Balancer:
 
-- DynamoDB:
+### Database
+For the database I chose DynamoDB, because ...
 
-- S3:
+### File Storage
+For file storage I chose S3, because ...
 
 - CI/CD Pipelines:
 
