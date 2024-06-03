@@ -1,5 +1,5 @@
 # Introduction
-Welcome to my AWS Skills Showcase Repository! This repository is designed to demonstrate my expertise in various AWS services and practices, including DevOps, cloud architecture, automation, and more.
+This repository is designed to demonstrate my expertise in various AWS services and practices, including DevOps, cloud architecture, automation, and more.
 
 # Motivation
 I created this repository to consolidate my knowledge and experience with AWS, share best practices, and provide a portfolio of my work. Cloud computing is a critical skill in today's tech landscape, and I am passionate about continuously learning and improving my abilities in this field.
