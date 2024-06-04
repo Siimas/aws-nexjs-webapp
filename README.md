@@ -58,3 +58,10 @@ For file storage I chose S3, because ...
 - Cost Management:
 
 - Disaster Recovery:
+
+
+# Commands
+
+- Docker
+  - ```docker-compose build client-dev```
+  - ```docker-compose up client-dev```
