@@ -36,8 +36,8 @@ jobs:
         id: push
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend/
-          file: ./Dockerfile.prod
+          context: .
+          file: ./frontend/Dockerfile.prod
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
