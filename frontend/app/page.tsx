@@ -5,7 +5,7 @@ export default function Home() {
 
   return (
     <main className="flex justify-center items-center">
-      <p>Current Environment: {currentEnvironment}</p>
+      <p>Current Environment: {currentEnvironment}</p> 
     </main>
   );
 }
