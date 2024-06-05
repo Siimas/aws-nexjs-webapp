@@ -10,6 +10,10 @@ RUN npm install
 
 RUN npm run build
 
-EXPOSE 3000
+ENV NODE_ENV production
+
+ENV PORT 443
+
+EXPOSE 443
 
 CMD [ "npm", "run", "start" ]
