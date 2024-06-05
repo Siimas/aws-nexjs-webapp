@@ -21,7 +21,9 @@ Deploy an auto-scalable and highly available Web App.
 
  Technologies and Tools
 - AWS Services: ... .
-- Tools: ... .
+- Tools: Docker.
+- IaC: Terraform.
+- DevOps: Github Actions, Docker Hub.
 
 # Architecture Overview
 In this section, I will outline the architecture of the deployed web application, detailing the components used and the rationale behind each architectural decision.
@@ -59,6 +61,16 @@ For file storage I chose S3, because ...
 
 - Disaster Recovery:
 
+# DevOps Overview
+In this section I will be explaining the decisions behind the CI and CD pipelines and how they were implemented.
+
+## Containerization
+
+TODO
+
+## Github Action
+
+TODO
 
 # Commands
 
