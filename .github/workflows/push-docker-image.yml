@@ -8,36 +8,30 @@ on:
       - '**/frontend/**'
 
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+  build-image:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-      attestations: write
-      id-token: write
-    steps:
-      - name: Check out the repo
+    steps: 
+      - name: Checkout Source
         uses: actions/checkout@v4
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Create .env file
+        run: |  # THIS IS A TEST
+          echo "ENVIRONMENT=${{ secrets.ENVIRONMENT }}" >> .env 
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: siimas/aws-skills-showcase
+      - name: Build docker image
+        run: docker build -t siimas/aws-skills-showcase .
 
-      - name: Build and push Docker image
-        id: push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./frontend/Dockerfile.prod
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Publish image to docker hub
+        run: docker push siimas/aws-skills-showcase:latest
+
+  # This sould terminate and start new ec2 instances to make the change
+  # ! find an alternative that doesn't need to terminate the ec2 instances
+  # deploy-aws:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Terminate instances
+  #       run: 

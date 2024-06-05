@@ -11,12 +11,3 @@ services:
       - /app/node_modules
     env_file:
       - .env.local
-
-  aws-skills-showcase:
-    build:
-      context: .
-      dockerfile: Dockerfile.prod
-    ports:
-      - 4000:3000
-    env_file:
-      - .env
