@@ -1,26 +1,29 @@
 # Introduction
 This repository is designed to demonstrate my expertise in various AWS services and practices, including DevOps, cloud architecture, automation, and more.
 
-# Motivation
-I created this repository to consolidate my knowledge and experience with AWS, share best practices, and provide a portfolio of my work. Cloud computing is a critical skill in today's tech landscape, and I am passionate about continuously learning and improving my abilities in this field.
+## Motivation
+I created this repository to consolidate my knowledge and experience with AWS, share best practices, and provide a portfolio of my work. Cloud computing is a critical skill in today's tech landscape, and I am passionate about continuously learning and improving my abilities in this field. The best way to showcase these skills is by applying them to real-world scenarios, such as deploying an auto-scalable and highly available web application for a SaaS.
 
-# Objective
-Deploy an auto-scalable and highly available Web App.
+## Objective
+Deploy an auto-scalable and highly available web application for a SaaS using AWS.
 
-# Projects Overview
-- Infrastructure as Code (IaC): Terraform.
-- CI/CD Pipelines: Jenkins, CodePipeline, and GitHub Actions.
-- Monitoring and Logging: CloudWatch dashboards and logging solutions.
-- Security and Compliance: IAM policies and automated compliance checks.
-- Cost Management: Scripts for cost optimization and budget alerts.
-- Disaster Recovery: Backup solutions and disaster recovery plans.
-- Load Balancer: Configurations for setting up load balancers to distribute traffic efficiently.
-- Auto-Scaling Groups: Implementing auto-scaling groups to maintain application performance and availability.
-- Database: Setup and management of DynamoDB for scalable and low-latency data storage.
-- S3: Using S3 for object storage.
+# Project Requirements
+- Utilize Infrastructure as Code (IaC).
+- Implement DevOps practices by configuring CI/CD pipelines.
+- Use AWS Elastic Load Balancing (ELB) to distribute network traffic.
+- Use Auto Scaling Groups (ASG) for application scaling.
+- Use Amazon DynamoDB for the database.
+- Monitor the AWS services using CloudWatch and CloudTrail.
+- Implement security best practices, such as using IAM roles and policies, enabling encryption, and setting up security groups.
+- Design a VPC with appropriate subnets, route tables, and gateways.
+- Implement a backup and recovery strategy for critical data.
+- Perform load and performance testing.
+- Ensure compliance with relevant regulations and standards.
+- Use AWS Cost Management tools to monitor and optimize costs.
+- Provide comprehensive documentation for setup, deployment, and maintenance.
 
- Technologies and Tools
-- AWS Services: ... .
+# Technologies and Tools
+- AWS: ELB, ASG .
 - Tools: Docker.
 - IaC: Terraform.
 - DevOps: Github Actions, Docker Hub.
@@ -29,8 +32,6 @@ Deploy an auto-scalable and highly available Web App.
 In this section, I will outline the architecture of the deployed web application, detailing the components used and the rationale behind each architectural decision.
 
 ## Architecture Diagram
-
-(Ensure you include a diagram that visualizes the architecture. You can create one using tools like AWS Architecture Icons, Lucidchart, or draw.io.)
 
 ![Cloud Architecture (1)](https://github.com/Siimas/AWS-WebApp-Showcase/assets/61023827/5c49d3ca-feb5-43f4-af05-b5d5f1fec332)
 
@@ -44,6 +45,7 @@ In this section, I will outline the architecture of the deployed web application
 - Auto Scaling Groups:
 
 - Load Balancer:
+    - Application Load Balancer (ALB)
 
 ### Database
 For the database I chose DynamoDB, because ...
