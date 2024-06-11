@@ -51,8 +51,12 @@ resource "aws_route_table" "project-main-rt" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.project-igw.id
   }
-
   tags = {
     Name = "Project - Main Route Table"
   }
+}
+
+resource "aws_main_route_table_association" "project-main-rt-association" {
+  vpc_id         = aws_vpc.project-vpc.id
+  route_table_id = aws_route_table.project-main-rt.id
 }
