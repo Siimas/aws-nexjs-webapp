@@ -1,79 +1,54 @@
-# Introduction
-This repository is designed to demonstrate my expertise in various AWS services and practices, including DevOps, cloud architecture, automation, and more.
+# Project Overview
 
-# Motivation
-I created this repository to consolidate my knowledge and experience with AWS, share best practices, and provide a portfolio of my work. Cloud computing is a critical skill in today's tech landscape, and I am passionate about continuously learning and improving my abilities in this field.
+todo...
 
-# Objective
-Deploy an auto-scalable and highly available Web App.
+## Project Title: 
+A clear and concise title for your project.
 
-# Projects Overview
-- Infrastructure as Code (IaC): Terraform.
-- CI/CD Pipelines: Jenkins, CodePipeline, and GitHub Actions.
-- Monitoring and Logging: CloudWatch dashboards and logging solutions.
-- Security and Compliance: IAM policies and automated compliance checks.
-- Cost Management: Scripts for cost optimization and budget alerts.
-- Disaster Recovery: Backup solutions and disaster recovery plans.
-- Load Balancer: Configurations for setting up load balancers to distribute traffic efficiently.
-- Auto-Scaling Groups: Implementing auto-scaling groups to maintain application performance and availability.
-- Database: Setup and management of DynamoDB for scalable and low-latency data storage.
-- S3: Using S3 for object storage.
-
- Technologies and Tools
-- AWS Services: ... .
-- Tools: Docker.
-- IaC: Terraform.
-- DevOps: Github Actions, Docker Hub.
-
-# Architecture Overview
-In this section, I will outline the architecture of the deployed web application, detailing the components used and the rationale behind each architectural decision.
+## Introduction
+Briefly describe the purpose of the project and its goals.
 
 ## Architecture Diagram
 
-(Ensure you include a diagram that visualizes the architecture. You can create one using tools like AWS Architecture Icons, Lucidchart, or draw.io.)
-
 ![Cloud Architecture (1)](https://github.com/Siimas/AWS-WebApp-Showcase/assets/61023827/5c49d3ca-feb5-43f4-af05-b5d5f1fec332)
 
-## Components and Decisions
-- VPC (Virtual Private Cloud):
+## Features
+List the main features of your infrastructure.
 
-- Subnets:
+## Technologies Used
+Mention all the AWS services and other technologies you have utilized.
 
-- EC2 Instances:
+## Prerequisites
+List any prerequisites needed to understand or deploy the project.
 
-- Auto Scaling Groups:
+# Detailed Documentation
 
-- Load Balancer:
+todo...
 
-### Database
-For the database I chose DynamoDB, because ...
+## Architecture Details:
+- Create a detailed documentation file (e.g., ARCHITECTURE.md) to explain the architecture in-depth.
+- Break down each component of your infrastructure, explaining its role and why it was chosen.
+- Describe how different components interact with each other.
 
-### File Storage
-For file storage I chose S3, because ...
+## Service Descriptions:
+- For each AWS service used, create a separate section in your documentation (or a separate file, if needed) explaining:
+- Purpose: Why the service is used in the project.
+- Configuration: How the service is configured, including key settings and parameters.
 
-- CI/CD Pipelines:
+# Usage Instructions
 
-- Monitoring and Logging:
+todo...
 
-- Security and Compliance:
+## Step-by-Step Guide:
+- Provide detailed, step-by-step instructions on how to deploy the infrastructure. This can be in a file like DEPLOYMENT.md.
+- Include any commands that need to be run, environment variables that need to be set, etc.
+- If there are post-deployment steps (e.g., configuring a service, setting up monitoring), document those as well.
 
-- Cost Management:
-
-- Disaster Recovery:
-
-# DevOps Overview
-In this section I will be explaining the decisions behind the CI and CD pipelines and how they were implemented.
-
-## Containerization
-
-TODO
-
-## Github Action
-
-TODO
+## Example Scenarios:
+- Include example scenarios or use cases in which your infrastructure can be used.
+- This helps showcase the practical applications of your setup.
 
 # Commands
-
 - Docker
   - ```docker-compose build client-dev```
   - ```docker-compose up client-dev```
