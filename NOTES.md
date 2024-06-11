@@ -1,7 +1,8 @@
 # Todo
 
-- [ ] Update the Frontend EC2 Instances by pulling the latest docker image (DevOps).
-- [ ] Configure a reverse proxy for the Frontend EC2 Launch Commands.
-- [ ] Add Load Balancer to Auto Scalling Group.
-- [ ] Improve Docker files.
-- [ ] Add Container Orchestration.
+- [ ] Configure a reverse proxy for the Frontend EC2.
+- [ ] Create the Load Balancer.
+- [ ] (DevOps) Update the Frontend EC2 Instances by pulling the latest docker image whenever there is a new version.
+- [ ] Improve the Docker files.
+- [ ] Implement Container Orchestration.
+- [ ] Improve the Architecture Diagram.
