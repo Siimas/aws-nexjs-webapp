@@ -5,7 +5,7 @@ resource "aws_launch_template" "project-frontend-ec2-lt" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.frontend-ec2-instances-sg.id]
   iam_instance_profile {
-    name = aws_iam_role.project-ec2-s3-dynamodb-access.name
+    name = aws_iam_instance_profile.project-ec2-s3-dynamodb-access.name
   }
   user_data = filebase64("ec2_frontend_launch_commands.sh")
 }
