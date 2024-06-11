@@ -1,4 +1,9 @@
+# Todo
+
+- [ ] Update the Frontend EC2 Instances by pulling the latest docker image (DevOps).
+
 # Commands
+
 - Docker
   - ```docker-compose build client-dev```
   - ```docker-compose up client-dev```
