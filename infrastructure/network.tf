@@ -1,3 +1,4 @@
+# Create VPC
 resource "aws_vpc" "project-vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
@@ -5,6 +6,7 @@ resource "aws_vpc" "project-vpc" {
   }
 }
 
+# Create Public Subnet 01a
 resource "aws_subnet" "project-public-subnet-01a" {
   vpc_id            = aws_vpc.project-vpc.id
   availability_zone = "eu-west-3a"
@@ -14,13 +16,7 @@ resource "aws_subnet" "project-public-subnet-01a" {
   }
 }
 
-resource "aws_internet_gateway" "project-igw" {
-  vpc_id = aws_vpc.project-vpc.id
-  tags = {
-    Name = "Project - IGW"
-  }
-}
-
+# Create Public Subnet 01b
 resource "aws_subnet" "project-public-subnet-01b" {
   vpc_id            = aws_vpc.project-vpc.id
   availability_zone = "eu-west-3b"
@@ -30,6 +26,7 @@ resource "aws_subnet" "project-public-subnet-01b" {
   }
 }
 
+# Create Public Subnet 01c
 resource "aws_subnet" "project-public-subnet-01c" {
   vpc_id            = aws_vpc.project-vpc.id
   availability_zone = "eu-west-3c"
@@ -39,6 +36,15 @@ resource "aws_subnet" "project-public-subnet-01c" {
   }
 }
 
+# Create Internet Gateway
+resource "aws_internet_gateway" "project-igw" {
+  vpc_id = aws_vpc.project-vpc.id
+  tags = {
+    Name = "Project - IGW"
+  }
+}
+
+# Create Main Route Table
 resource "aws_route_table" "project-main-rt" {
   vpc_id = aws_vpc.project-vpc.id
   route {

@@ -1,3 +1,4 @@
+# Create NACL for Public Subnets
 resource "aws_network_acl" "main-project-nacl" {
   vpc_id = aws_vpc.project-vpc.id
   subnet_ids = [
@@ -26,6 +27,7 @@ resource "aws_network_acl" "main-project-nacl" {
   }
 }
 
+# Create Security Group for Frontend EC2 Intances
 resource "aws_security_group" "frontend-ec2-instances-sg" {
   name   = "Frontend EC2 Instances SG"
   vpc_id = aws_vpc.project-vpc.id

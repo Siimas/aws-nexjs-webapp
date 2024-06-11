@@ -1,3 +1,4 @@
+# Create Launch Template
 resource "aws_launch_template" "project-frontend-ec2-lt" {
   name                   = "Project-FrontendEC2LaunchTemplate"
   image_id               = "ami-052984d1804039ba8"
@@ -9,10 +10,7 @@ resource "aws_launch_template" "project-frontend-ec2-lt" {
   user_data = filebase64("ec2_frontend_launch_commands.sh")
 }
 
-resource "aws_launch_template" "name" {
-
-}
-
+# Create Auto Scaling Group
 resource "aws_autoscaling_group" "project-frontend-ec2-asg" {
   name                      = "Project-FrontendEC2ASG"
   max_size                  = 5
