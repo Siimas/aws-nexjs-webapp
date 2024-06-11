@@ -38,7 +38,7 @@ resource "aws_iam_role_policy_attachment" "attach-policy-AmazonDynamoDBFullAcces
 # Attach IAM Policy to IAM Role
 resource "aws_iam_role_policy_attachment" "attach-policy-AmazonS3FullAccess" {
   role       = aws_iam_role.project-ec2-s3-dynamodb-access.name
-  policy_arn = data.aws_iam_policy.s3-policy.arn 
+  policy_arn = data.aws_iam_policy.s3-policy.arn
 }
 
 # Create IAM Instance Profile for EC2

@@ -1,11 +1,15 @@
 # Create Launch Template
 resource "aws_launch_template" "project-frontend-ec2-lt" {
-  name                   = "Project-FrontendEC2LaunchTemplate"
-  image_id               = "ami-052984d1804039ba8"
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.frontend-ec2-instances-sg.id]
+  name          = "Project-FrontendEC2LaunchTemplate"
+  image_id      = "ami-052984d1804039ba8"
+  instance_type = "t2.micro"
   iam_instance_profile {
     name = aws_iam_instance_profile.project-ec2-s3-dynamodb-access.name
+  }
+  network_interfaces {
+    security_groups             = [aws_security_group.frontend-ec2-instances-sg.id]
+    associate_public_ip_address = true
+    delete_on_termination       = true
   }
   user_data = filebase64("ec2_frontend_launch_commands.sh")
 }
