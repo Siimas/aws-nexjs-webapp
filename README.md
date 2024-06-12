@@ -6,7 +6,7 @@ In this project, I have leveraged a variety of AWS services to create a robust i
 
 ## Architecture Diagram
 
-![Cloud Architecture (1)](https://github.com/Siimas/AWS-WebApp-Showcase/assets/61023827/5c49d3ca-feb5-43f4-af05-b5d5f1fec332)
+![architecture](https://github.com/Siimas/aws-nexjs-webapp/assets/61023827/dd4dd54d-4508-4e2b-b8d2-cbc7c3176b97)
 
 ## Features
 - Highly Available and Scalable Architecture: Utilizes Amazon EC2 Auto Scaling and Elastic Load Balancing to ensure high availability and scalability.
