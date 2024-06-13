@@ -4,9 +4,17 @@ This repository showcases a scalable, secure, and cost-effective cloud architect
 
 In this project, I have leveraged a variety of AWS services to create a robust infrastructure suitable for a modern web application. The architecture includes a range of components such as virtual networks, scalable compute resources, managed databases, and integrated security measures.
 
-## Architecture Diagram
+## Diagrams
 
-![Cloud Architecture (1)](https://github.com/Siimas/AWS-WebApp-Showcase/assets/61023827/5c49d3ca-feb5-43f4-af05-b5d5f1fec332)
+### Cloud Architecture
+
+![cloud-architecture](https://github.com/Siimas/aws-nexjs-webapp/assets/61023827/dd4dd54d-4508-4e2b-b8d2-cbc7c3176b97)
+
+### DevOps Architecture
+
+![devops-architecture](https://github.com/Siimas/aws-nexjs-webapp/assets/61023827/ea4ba7aa-3c72-4f9e-b0c9-657fc6f6139e)
+
+**Note:** *ideally there should be a Dev and Prod environments so that the deployment could be tested in the Dev environment first.*
 
 ## Features
 - Highly Available and Scalable Architecture: Utilizes Amazon EC2 Auto Scaling and Elastic Load Balancing to ensure high availability and scalability.
