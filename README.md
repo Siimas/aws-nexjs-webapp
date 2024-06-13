@@ -4,17 +4,9 @@ This repository showcases a scalable, secure, and cost-effective cloud architect
 
 In this project, I have leveraged a variety of AWS services to create a robust infrastructure suitable for a modern web application. The architecture includes a range of components such as virtual networks, scalable compute resources, managed databases, and integrated security measures.
 
-## Diagrams
+## Architecture Diagram
 
-### Cloud Architecture
-
-![cloud-architecture](https://github.com/Siimas/aws-nexjs-webapp/assets/61023827/dd4dd54d-4508-4e2b-b8d2-cbc7c3176b97)
-
-### DevOps Architecture
-
-![devops-architecture](https://github.com/Siimas/aws-nexjs-webapp/assets/61023827/ea4ba7aa-3c72-4f9e-b0c9-657fc6f6139e)
-
-**Note:** *ideally there should be a Dev and Prod environments so that the deployment could be tested in the Dev environment first.*
+![Cloud Architecture (1)](https://github.com/Siimas/AWS-WebApp-Showcase/assets/61023827/5c49d3ca-feb5-43f4-af05-b5d5f1fec332)
 
 ## Features
 - Highly Available and Scalable Architecture: Utilizes Amazon EC2 Auto Scaling and Elastic Load Balancing to ensure high availability and scalability.
@@ -45,12 +37,18 @@ To deploy and manage this infrastructure, you will need:
 
 todo...
 
-## Architecture Details:
+## Architecture Details
+
 - Create a detailed documentation file (e.g., ARCHITECTURE.md) to explain the architecture in-depth.
 - Break down each component of your infrastructure, explaining its role and why it was chosen.
 - Describe how different components interact with each other.
 
-## Service Descriptions:
+**Questions**:
+
+- Should it be Serverless, why?
+
+## Service Descriptions
+
 - For each AWS service used, create a separate section in your documentation (or a separate file, if needed) explaining:
 - Purpose: Why the service is used in the project.
 - Configuration: How the service is configured, including key settings and parameters.
@@ -59,7 +57,8 @@ todo...
 
 todo...
 
-## Step-by-Step Guide:
+## Step-by-Step Guide
+
 - Provide detailed, step-by-step instructions on how to deploy the infrastructure. This can be in a file like DEPLOYMENT.md.
 - Include any commands that need to be run, environment variables that need to be set, etc.
 - If there are post-deployment steps (e.g., configuring a service, setting up monitoring), document those as well.

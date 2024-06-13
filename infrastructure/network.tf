@@ -60,3 +60,17 @@ resource "aws_main_route_table_association" "project-main-rt-association" {
   vpc_id         = aws_vpc.project-vpc.id
   route_table_id = aws_route_table.project-main-rt.id
 }
+
+# Create Application Load Balancer
+resource "aws_lb" "project-alb" {
+  name = "project-alb"
+  load_balancer_type = "application"
+  internal = false
+  ip_address_type = "ipv4"
+  subnets = [ 
+    aws_subnet.project-public-subnet-01a.id,
+    aws_subnet.project-public-subnet-01b.id,
+    aws_subnet.project-public-subnet-01c.id
+  ]
+  security_groups = [ aws_security_group.frontend-ec2-instances-sg.id ]
+}

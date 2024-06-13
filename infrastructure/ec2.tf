@@ -11,7 +11,7 @@ resource "aws_launch_template" "project-frontend-ec2-lt" {
     associate_public_ip_address = true
     delete_on_termination       = true
   }
-  user_data = filebase64("ec2_frontend_launch_commands.sh")
+  //user_data = filebase64("ec2_frontend_launch_commands.sh")
 }
 
 # Create Auto Scaling Group
@@ -37,4 +37,9 @@ resource "aws_autoscaling_group" "project-frontend-ec2-asg" {
     min_healthy_percentage = 90
     max_healthy_percentage = 120
   }
+}
+
+resource "aws_autoscaling_attachment" "asg-alb-attachment" {
+  autoscaling_group_name = aws_autoscaling_group.project-frontend-ec2-asg.id
+  elb = aws_lb.project-alb.id
 }

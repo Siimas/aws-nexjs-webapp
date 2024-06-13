@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t your-repository .
+      - docker tag your-repository:latest your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository:latest
+      - echo Build completed on `date`
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository:latest
+      - echo Writing image details to file...
+      - echo "image: your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository:latest" > imageDetail.txt
+      - echo Uploading Docker Compose and NGINX files to S3...
+      - aws s3 cp docker-compose.yml s3://your-bucket-name/docker-compose.yml
+      - aws s3 cp nginx.conf s3://your-bucket-name/nginx.conf
+      - aws s3 cp imageDetail.txt s3://your-bucket-name/imageDetail.txt
+artifacts:
+  files:
+    - imageDetail.txt
