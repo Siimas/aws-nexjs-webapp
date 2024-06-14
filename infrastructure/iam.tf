@@ -1,6 +1,6 @@
 # Create IAM Role
 resource "aws_iam_role" "project-ec2-s3-dynamodb-access" {
-  name = "ProjectEC2AccessToS3AndDynamoDB"
+  name = "${var.project_name}EC2AccessToS3AndDynamoDB"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -17,7 +17,7 @@ resource "aws_iam_role" "project-ec2-s3-dynamodb-access" {
   })
 
   tags = {
-    Name = "Project - EC2 Access to S3 And DynamoDB"
+    Name = "${var.project_name} - EC2 Access to S3 And DynamoDB"
   }
 }
 
@@ -43,7 +43,7 @@ resource "aws_iam_role_policy_attachment" "attach-policy-AmazonS3FullAccess" {
 
 # Create IAM Instance Profile for EC2
 resource "aws_iam_instance_profile" "project-ec2-s3-dynamodb-access" {
-  name = "project-ec2-s3-dynamodb-access"
+  name = "${var.project_name}-ec2-s3-dynamodb-access"
   role = aws_iam_role.project-ec2-s3-dynamodb-access.name
 }
 
@@ -60,51 +60,4 @@ data "aws_iam_policy_document" "assume_role" {
 
     actions = ["sts:AssumeRole"]
   }
-}
-
-resource "aws_iam_role" "codepipeline_role" {
-  name               = "test-role"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
-}
-
-data "aws_iam_policy_document" "codepipeline_policy" {
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "s3:GetObject",
-      "s3:GetObjectVersion",
-      "s3:GetBucketVersioning",
-      "s3:PutObjectAcl",
-      "s3:PutObject",
-    ]
-
-    resources = [
-      aws_s3_bucket.devops-bucket.arn,
-      "${aws_s3_bucket.devops-bucket.arn}/*"
-    ]
-  }
-
-  statement {
-    effect    = "Allow"
-    actions   = ["codestar-connections:UseConnection"]
-    resources = [aws_codestarconnections_connection.example.arn]
-  }
-
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "codebuild:BatchGetBuilds",
-      "codebuild:StartBuild",
-    ]
-
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_role_policy" "codepipeline_policy" {
-  name   = "codepipeline_policy"
-  role   = aws_iam_role.codepipeline_role.id
-  policy = data.aws_iam_policy_document.codepipeline_policy.json
 }

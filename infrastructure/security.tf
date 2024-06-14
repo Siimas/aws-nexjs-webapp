@@ -23,7 +23,7 @@ resource "aws_network_acl" "main-project-nacl" {
     to_port    = 0
   }
   tags = {
-    Name = "Project - NACL for Public Subnets"
+    Name = "${var.project_name} - NACL for Public Subnets"
   }
 }
 

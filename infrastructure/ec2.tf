@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "project-frontend-ec2-asg" {
   }
 }
 
-resource "aws_autoscaling_attachment" "asg-alb-attachment" {
+/* resource "aws_autoscaling_attachment" "asg-alb-attachment" {
   autoscaling_group_name = aws_autoscaling_group.project-frontend-ec2-asg.id
   elb = aws_lb.project-alb.id
-}
+} */

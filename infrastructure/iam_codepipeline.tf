@@ -1,0 +1,97 @@
+# IAM role for CodePipeline
+resource "aws_iam_role" "codepipeline_role" {
+  name = "codepipeline-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "codepipeline.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+# IAM policy for CodePipeline
+resource "aws_iam_policy" "codepipeline_policy" {
+  name        = "codepipeline-policy"
+  description = "Policy for CodePipeline"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "s3:*",
+          "codecommit:*",
+          "codebuild:*",
+          "iam:PassRole",
+          "codestar-connections:UseConnection",
+          "codestar-connections:PassConnection"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+# Attach policy to CodePipeline role
+resource "aws_iam_role_policy_attachment" "codepipeline_role_attachment" {
+  role       = aws_iam_role.codepipeline_role.name
+  policy_arn = aws_iam_policy.codepipeline_policy.arn
+}
+
+# IAM role for CodeBuild
+resource "aws_iam_role" "codebuild_role" {
+  name = "codebuild-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "codebuild.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+# IAM policy for CodeBuild
+resource "aws_iam_policy" "codebuild_policy" {
+  name        = "codebuild-policy"
+  description = "Policy for CodeBuild"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "logs:*",
+          "s3:*",
+          "codecommit:*",
+          "codebuild:*"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+# Attach policy to CodeBuild role
+resource "aws_iam_role_policy_attachment" "codebuild_role_attachment" {
+  role       = aws_iam_role.codebuild_role.name
+  policy_arn = aws_iam_policy.codebuild_policy.arn
+}
+
+# Source stage (CodeCommit example)
+resource "aws_codecommit_repository" "repo" {
+  repository_name = "my-repo"
+  description     = "My demonstration repository"
+}

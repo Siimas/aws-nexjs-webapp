@@ -1,10 +1,64 @@
-resource "aws_codepipeline" "codepipeline" {
-  name     = "tf-test-pipeline"
-  role_arn = aws_iam_role.codepipeline_role.arn
+# CodeBuild project
+resource "aws_codebuild_project" "build" {
+  name          = "codebuild-project"
+  description   = "Build project for CodePipeline"
+  build_timeout = "5"
+
+  source {
+    type      = "GITHUB"
+    location  = "https://github.com/your-github-username/your-repository-name"
+    buildspec = <<EOF
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  build:
+    commands:
+      - echo "Building..."
+EOF
+  }
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    compute_type    = "BUILD_GENERAL1_SMALL"
+    image           = "aws/codebuild/standard:4.0"
+    type            = "LINUX_CONTAINER"
+    privileged_mode = true
+  }
+
+  service_role = aws_iam_role.codebuild_role.arn
+}
+
+# CodePipeline
+resource "aws_codepipeline" "pipeline" {
+  name           = "codepipeline"
+  pipeline_type  = "V2"
+  role_arn       = aws_iam_role.codepipeline_role.arn
+  execution_mode = "QUEUED"
 
   artifact_store {
-    location = aws_s3_bucket.devops-bucket.bucket
     type     = "S3"
+    location = aws_s3_bucket.devops-bucket.bucket
+  }
+
+  trigger {
+    provider_type = "CodeStarSourceConnection"
+    git_configuration {
+      source_action_name = "Source"
+      push {
+        branches {
+          includes = ["main"]
+        }
+        file_paths {
+          includes = ["**/frontend/**"]
+        }
+      }
+    }
   }
 
   stage {
@@ -19,9 +73,10 @@ resource "aws_codepipeline" "codepipeline" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        ConnectionArn    = aws_codestarconnections_connection.example.arn
-        FullRepositoryId = "my-organization/example"
-        BranchName       = "main"
+        ConnectionArn    = var.github_connection_arn
+        FullRepositoryId = "${var.github_username}/${var.repository_name}"
+        BranchName       = var.branch_name
+
       }
     }
   }
@@ -34,39 +89,13 @@ resource "aws_codepipeline" "codepipeline" {
       category         = "Build"
       owner            = "AWS"
       provider         = "CodeBuild"
+      version          = "1"
       input_artifacts  = ["source_output"]
       output_artifacts = ["build_output"]
-      version          = "1"
 
       configuration = {
-        ProjectName = "test"
+        ProjectName = aws_codebuild_project.build.name
       }
     }
   }
-
-  stage {
-    name = "Deploy"
-
-    action {
-      name            = "Deploy"
-      category        = "Deploy"
-      owner           = "AWS"
-      provider        = "CloudFormation"
-      input_artifacts = ["build_output"]
-      version         = "1"
-
-      configuration = {
-        ActionMode     = "REPLACE_ON_FAILURE"
-        Capabilities   = "CAPABILITY_AUTO_EXPAND,CAPABILITY_IAM"
-        OutputFileName = "CreateStackOutput.json"
-        StackName      = "MyStack"
-        TemplatePath   = "build_output::sam-templated.yaml"
-      }
-    }
-  }
-}
-
-resource "aws_codestarconnections_connection" "example" {
-  name          = "example-connection"
-  provider_type = "GitHub"
 }
