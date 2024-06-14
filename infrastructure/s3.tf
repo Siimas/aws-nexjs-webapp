@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "devops-bucket" {
-  bucket = "webapp-devops-bucket"
+  bucket        = "webapp-devops-bucket"
+  force_destroy = true
 
   tags = {
     Name        = "DevOps Bucket"
