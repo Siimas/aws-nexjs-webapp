@@ -8,7 +8,7 @@ In this project, I have leveraged a variety of AWS services to create a robust i
 
 ### Cloud Architecture
 
-![cloud-architecture](https://github.com/Siimas/aws-nexjs-webapp/assets/61023827/dd4dd54d-4508-4e2b-b8d2-cbc7c3176b97)
+![cloud-architecture](https://github.com/Siimas/aws-nexjs-webapp/assets/61023827/983b27f6-a176-43a0-a277-81945cf62286)
 
 ### DevOps Architecture
 
