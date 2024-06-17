@@ -1,39 +1,3 @@
-# CodeBuild project
-resource "aws_codebuild_project" "build" {
-  name          = "codebuild-project"
-  description   = "Build project for CodePipeline"
-  build_timeout = "5"
-
-  source {
-    type      = "GITHUB"
-    location  = "https://github.com/your-github-username/your-repository-name"
-    buildspec = <<EOF
-version: 0.2
-
-phases:
-  install:
-    runtime-versions:
-      nodejs: 12
-  build:
-    commands:
-      - echo "Building..."
-EOF
-  }
-
-  artifacts {
-    type = "NO_ARTIFACTS"
-  }
-
-  environment {
-    compute_type    = "BUILD_GENERAL1_SMALL"
-    image           = "aws/codebuild/standard:4.0"
-    type            = "LINUX_CONTAINER"
-    privileged_mode = true
-  }
-
-  service_role = aws_iam_role.codebuild_role.arn
-}
-
 # CodePipeline
 resource "aws_codepipeline" "pipeline" {
   name           = "codepipeline"
@@ -114,36 +78,6 @@ resource "aws_codepipeline" "pipeline" {
         ApplicationName     = aws_codedeploy_app.app.name
         DeploymentGroupName = aws_codedeploy_deployment_group.group.id
       }
-    }
-  }
-}
-
-# CodeDeploy Application
-resource "aws_codedeploy_app" "app" {
-  name = "my-codedeploy-app"
-}
-
-# CodeDeploy Deployment Group
-resource "aws_codedeploy_deployment_group" "group" {
-  deployment_group_name = "my-codedeploy-group"
-  app_name              = aws_codedeploy_app.app.name
-  service_role_arn      = aws_iam_role.codedeploy_role.arn
-  blue_green_deployment_config {
-    deployment_ready_option {
-      action_on_timeout = "CONTINUE_DEPLOYMENT"
-    }
-    terminate_blue_instances_on_deployment_success {
-      action = "TERMINATE"
-    }
-  }
-  auto_rollback_configuration {
-    enabled = true
-    events  = ["DEPLOYMENT_FAILURE"]
-  }
-  autoscaling_groups = [aws_autoscaling_group.project-frontend-ec2-asg.name]
-  load_balancer_info {
-    target_group_info {
-      name = aws_lb.project-alb.name
     }
   }
 }
