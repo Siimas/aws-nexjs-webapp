@@ -28,6 +28,7 @@ resource "aws_iam_policy" "codepipeline_policy" {
           "s3:*",
           "codecommit:*",
           "codebuild:*",
+          "codedeploy:*",
           "iam:PassRole",
           "codestar-connections:UseConnection",
           "codestar-connections:PassConnection"
@@ -120,4 +121,22 @@ resource "aws_iam_role" "codedeploy_role" {
 resource "aws_iam_role_policy_attachment" "codedeploy_role_attachment" {
   role       = aws_iam_role.codedeploy_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
+}
+
+# IAM role policy (inline policy) for CodeDeploy S3 access
+resource "aws_iam_role_policy" "codedeploy_s3_access" {
+  name   = "CodeDeployS3Access"
+  role   = aws_iam_role.codedeploy_role.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "s3:*"
+        ],
+        Resource = "arn:aws:s3:::${var.devops_s3_bucket_name}/*"
+      }
+    ]
+  })
 }

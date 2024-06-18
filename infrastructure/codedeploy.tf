@@ -1,12 +1,12 @@
 # CodeDeploy Application
-resource "aws_codedeploy_app" "app" {
+resource "aws_codedeploy_app" "codedeploy-app" {
   name = "my-codedeploy-app"
 }
 
 # CodeDeploy Deployment Group
-resource "aws_codedeploy_deployment_group" "group" {
-  deployment_group_name = "my-codedeploy-group"
-  app_name              = aws_codedeploy_app.app.name
+resource "aws_codedeploy_deployment_group" "codedeploy-deployment-group" {
+  deployment_group_name = var.codedeploy_deployment_group_name
+  app_name              = aws_codedeploy_app.codedeploy-app.name
   service_role_arn      = aws_iam_role.codedeploy_role.arn
   blue_green_deployment_config {
     deployment_ready_option {

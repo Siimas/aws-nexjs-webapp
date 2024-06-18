@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo yum update -y
-sudo yum install ruby
+sudo yum install ruby -y
 sudo yum install wget
 
 # Install code deploy agent
@@ -20,5 +20,5 @@ sudo docker-compose version
 # Start Docker
 sudo service docker start
 
-mkdir app
-cd app
+sudo mkdir app
+sudo cd app

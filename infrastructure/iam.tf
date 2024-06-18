@@ -1,4 +1,4 @@
-# Create IAM Role
+# Create EC2 IAM Role
 resource "aws_iam_role" "project-ec2-s3-dynamodb-access" {
   name = "${var.project_name}EC2AccessToS3AndDynamoDB"
 
@@ -29,6 +29,10 @@ data "aws_iam_policy" "s3-policy" {
   name = "AmazonS3FullAccess"
 }
 
+data "aws_iam_policy" "ecr-policy" {
+  name = "AWSAppRunnerServicePolicyForECRAccess"
+}
+
 # Attach IAM Policy to IAM Role
 resource "aws_iam_role_policy_attachment" "attach-policy-AmazonDynamoDBFullAccess" {
   role       = aws_iam_role.project-ec2-s3-dynamodb-access.name
@@ -41,23 +45,14 @@ resource "aws_iam_role_policy_attachment" "attach-policy-AmazonS3FullAccess" {
   policy_arn = data.aws_iam_policy.s3-policy.arn
 }
 
+# Attach IAM Policy to IAM Role
+resource "aws_iam_role_policy_attachment" "attach-policy-AWSAppRunnerServicePolicyForECRAccess" {
+  role       = aws_iam_role.project-ec2-s3-dynamodb-access.name
+  policy_arn = data.aws_iam_policy.ecr-policy.arn
+}
+
 # Create IAM Instance Profile for EC2
 resource "aws_iam_instance_profile" "project-ec2-s3-dynamodb-access" {
   name = "${var.project_name}-ec2-s3-dynamodb-access"
   role = aws_iam_role.project-ec2-s3-dynamodb-access.name
-}
-
-# CodePipeline
-
-data "aws_iam_policy_document" "assume_role" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      type        = "Service"
-      identifiers = ["codepipeline.amazonaws.com"]
-    }
-
-    actions = ["sts:AssumeRole"]
-  }
 }

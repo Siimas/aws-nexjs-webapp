@@ -28,3 +28,13 @@ variable "branch_name" {
   description = "The Branch name of Repository used for the connection"
   type        = string
 }
+
+variable "devops_s3_bucket_name" {
+  description = "The DevOps S3 Bucket name"
+  type        = string
+}
+
+variable "codedeploy_deployment_group_name" {
+  description = "The CodeDeploy deployment group name"
+  type        = string
+}

@@ -1,4 +1,18 @@
 # CodePipeline
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["codepipeline.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+# CodePipeline
 resource "aws_codepipeline" "pipeline" {
   name           = "codepipeline"
   pipeline_type  = "V2"
@@ -40,7 +54,20 @@ resource "aws_codepipeline" "pipeline" {
         ConnectionArn    = var.github_connection_arn
         FullRepositoryId = "${var.github_username}/${var.repository_name}"
         BranchName       = var.branch_name
+      }
+    }
 
+    action {
+      name             = "S3Source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "S3"
+      version          = "1"
+      output_artifacts = ["s3_output"]
+
+      configuration = {
+        S3Bucket    = aws_s3_bucket.devops-bucket.bucket
+        S3ObjectKey = "deployment/deployment.zip"
       }
     }
   }
@@ -72,11 +99,10 @@ resource "aws_codepipeline" "pipeline" {
       owner           = "AWS"
       provider        = "CodeDeploy"
       version         = "1"
-      input_artifacts = ["build_output"]
-
+      input_artifacts = ["s3_output"]
       configuration = {
-        ApplicationName     = aws_codedeploy_app.app.name
-        DeploymentGroupName = aws_codedeploy_deployment_group.group.id
+        ApplicationName     = aws_codedeploy_app.codedeploy-app.name
+        DeploymentGroupName = var.codedeploy_deployment_group_name
       }
     }
   }
