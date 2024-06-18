@@ -3,6 +3,11 @@ sudo yum update -y
 sudo yum install ruby
 sudo yum install wget
 
+# Install code deploy agent
+sudo wget https://aws-codedeploy-eu-west-3.s3.eu-west-3.amazonaws.com/latest/install
+sudo chmod +x ./install
+sudo ./install auto
+
 # Install Docker
 sudo yum install -y docker
 sudo usermod -a -G docker ec2-user
@@ -17,14 +22,3 @@ sudo service docker start
 
 mkdir app
 cd app
-
-# Pull Docker image, docker compose file and nginx file
-# sudo aws s3 cp s3://webapp-devops-bucket/frontend/ . --recursive
-
-# Start app with docker compose
-# sudo docker-compose up -d
-
-# Install code deploy agent
-wget https://aws-codedeploy-eu-west-3.s3.eu-west-3.amazonaws.com/latest/install
-chmod +x ./install
-sudo ./install auto

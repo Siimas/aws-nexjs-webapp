@@ -2,10 +2,10 @@ version: 0.2
 
 env:
   variables:
-    AWS_DEFAULT_REGION: "eu-west-3"
-    ACCOUNT_ID: "471112925329"
-    REPOSITORY_NAME: "frontend-devops-ecr"
-    IMAGE_TAG: "latest"
+    AWS_DEFAULT_REGION: eu-west-3
+    ACCOUNT_ID: '471112925329'
+    REPOSITORY_NAME: frontend-devops-ecr
+    IMAGE_TAG: latest
 
 phases:
   pre_build:
@@ -27,6 +27,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
+      - docker images
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name":"container-name","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
