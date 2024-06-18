@@ -17,12 +17,6 @@ resource "aws_s3_bucket_versioning" "devops-bucket-versioning" {
 
 resource "aws_s3_object" "nginx-file" {
   bucket = aws_s3_bucket.devops-bucket.id
-  key    = "frontend/nginx.conf"
-  source = "../frontend/nginx.conf"
-}
-
-resource "aws_s3_object" "docker-compose-file" {
-  bucket = aws_s3_bucket.devops-bucket.id
-  key    = "frontend/docker-compose.yml"
-  source = "../frontend/docker-compose.yml"
+  key    = "deployment/deployment.zip"
+  source = "deployment/deployment.zip"
 }

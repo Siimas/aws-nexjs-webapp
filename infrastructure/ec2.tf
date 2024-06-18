@@ -11,7 +11,7 @@ resource "aws_launch_template" "project-frontend-ec2-lt" {
     associate_public_ip_address = true
     delete_on_termination       = true
   }
-  //user_data = filebase64("ec2_frontend_launch_commands.sh")
+  user_data = filebase64("ec2_frontend_launch_commands.sh")
 }
 
 # Create Auto Scaling Group

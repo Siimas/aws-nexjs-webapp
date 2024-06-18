@@ -1,27 +1,36 @@
 version: 0.2
 
+env:
+  variables:
+    AWS_DEFAULT_REGION: eu-west-3
+    ACCOUNT_ID: '471112925329'
+    REPOSITORY_NAME: frontend-devops-ecr
+    IMAGE_TAG: latest
+
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
+      - aws --version
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - REPOSITORY_URI=$ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$REPOSITORY_NAME
+
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t your-repository .
-      - docker tag your-repository:latest your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository:latest
-      - echo Build completed on `date`
+      - cd frontend
+      - ls -la
+      - docker build -t $REPOSITORY_URI:$IMAGE_TAG .
+
   post_build:
     commands:
+      - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository:latest
-      - echo Writing image details to file...
-      - echo "image: your-account-id.dkr.ecr.your-region.amazonaws.com/your-repository:latest" > imageDetail.txt
-      - echo Uploading Docker Compose and NGINX files to S3...
-      - aws s3 cp docker-compose.yml s3://your-bucket-name/docker-compose.yml
-      - aws s3 cp nginx.conf s3://your-bucket-name/nginx.conf
-      - aws s3 cp imageDetail.txt s3://your-bucket-name/imageDetail.txt
+      - docker images
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"container-name","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+
 artifacts:
-  files:
-    - imageDetail.txt
+  files: imagedefinitions.json

@@ -75,7 +75,8 @@ resource "aws_iam_policy" "codebuild_policy" {
           "logs:*",
           "s3:*",
           "codecommit:*",
-          "codebuild:*"
+          "codebuild:*",
+          "ecr:*",
         ]
         Effect   = "Allow"
         Resource = "*"
